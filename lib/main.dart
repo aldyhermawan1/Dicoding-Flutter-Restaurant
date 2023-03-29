@@ -1,3 +1,5 @@
+import 'package:dicoding_restaurant/model/restaurant.dart';
+import 'package:dicoding_restaurant/presentation/detail/detail_screen.dart';
 import 'package:dicoding_restaurant/presentation/main/main_screen.dart';
 import 'package:dicoding_restaurant/values/routes.dart';
 import 'package:dicoding_restaurant/values/strings.dart';
@@ -25,7 +27,9 @@ class MyApp extends StatelessWidget {
       initialRoute: routeMain,
       routes: {
         routeMain: (context) => const MainScreen(),
-        routeDetail: (context) => const MainScreen() // TODO,
+        routeDetail: (context) => DetailScreen(
+            restaurant:
+                ModalRoute.of(context)?.settings.arguments as Restaurant),
       },
     );
   }

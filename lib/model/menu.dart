@@ -1,12 +1,8 @@
-import 'dart:convert';
-
-import 'package:fimber/fimber.dart';
-
-import 'menu_item.dart';
+import 'menu_name.dart';
 
 class Menu {
-  final List<MenuItem> foods;
-  final List<MenuItem> drinks;
+  final List<MenuName> foods;
+  final List<MenuName> drinks;
 
   Menu({
     required this.foods,
@@ -18,8 +14,8 @@ class Menu {
     final List drinks = menu['drinks'];
 
     return Menu(
-      foods: foods.map((e) => MenuItem.fromJson(e)).toList(),
-      drinks: drinks.map((e) => MenuItem.fromJson(e)).toList(),
+      foods: foods.map((e) => MenuName.fromJson(e)).toList(),
+      drinks: drinks.map((e) => MenuName.fromJson(e)).toList(),
     );
   }
 }
