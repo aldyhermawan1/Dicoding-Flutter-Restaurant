@@ -25,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
         builder: (context, snapshot) {
           final List<Restaurant> restaurants = parseRestaurant(snapshot.data);
           return ListView.separated(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.all(16),
             itemCount: restaurants.length,
             itemBuilder: (context, index) {
               return RestaurantItem(restaurant: restaurants[index]);
