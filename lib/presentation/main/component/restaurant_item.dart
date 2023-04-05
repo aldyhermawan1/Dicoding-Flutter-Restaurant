@@ -2,12 +2,15 @@ import 'package:dicoding_restaurant/data/model/restaurant.dart';
 import 'package:dicoding_restaurant/values/strings.dart';
 import 'package:flutter/material.dart';
 
-import '../../../values/routes.dart';
-
 class RestaurantItem extends StatelessWidget {
   final Restaurant restaurant;
+  final Function() detailNavigationAction;
 
-  const RestaurantItem({super.key, required this.restaurant});
+  const RestaurantItem({
+    super.key,
+    required this.restaurant,
+    required this.detailNavigationAction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class RestaurantItem extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, routeDetail, arguments: restaurant);
+          detailNavigationAction();
         },
         child: Row(
           children: [

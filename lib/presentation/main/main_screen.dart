@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/state/search_restaurant_state.dart';
+import '../../data/model/restaurant.dart';
+import '../../values/routes.dart';
 import 'component/restaurant_item.dart';
 
 class MainScreen extends StatefulWidget {
@@ -20,8 +22,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    context.read<RestaurantBloc>().add(const GetRestaurantListEvent());
     super.initState();
+    context.read<RestaurantBloc>().add(const GetRestaurantListEvent());
   }
 
   @override
@@ -61,7 +63,12 @@ class _MainScreenState extends State<MainScreen> {
             padding: const EdgeInsets.all(16),
             itemCount: state.restaurants.length,
             itemBuilder: (context, index) {
-              return RestaurantItem(restaurant: state.restaurants[index]);
+              return RestaurantItem(
+                restaurant: state.restaurants[index],
+                detailNavigationAction: () {
+                  detailNavigationAction(state.restaurants[index]);
+                },
+              );
             },
             separatorBuilder: (BuildContext context, int index) {
               return const SizedBox(height: 8);
@@ -88,7 +95,12 @@ class _MainScreenState extends State<MainScreen> {
             padding: const EdgeInsets.all(16),
             itemCount: state.restaurants.length,
             itemBuilder: (context, index) {
-              return RestaurantItem(restaurant: state.restaurants[index]);
+              return RestaurantItem(
+                restaurant: state.restaurants[index],
+                detailNavigationAction: () {
+                  detailNavigationAction(state.restaurants[index]);
+                },
+              );
             },
             separatorBuilder: (BuildContext context, int index) {
               return const SizedBox(height: 8);
@@ -99,5 +111,12 @@ class _MainScreenState extends State<MainScreen> {
         }
       },
     );
+  }
+
+  void detailNavigationAction(Restaurant restaurant) {
+    Navigator.pushNamed(context, routeDetail, arguments: restaurant)
+        .then((_) => setState(() {
+              _query = '';
+            }));
   }
 }

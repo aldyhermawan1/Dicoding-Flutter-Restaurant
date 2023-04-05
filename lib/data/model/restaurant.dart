@@ -21,7 +21,7 @@ class Restaurant extends Equatable{
   final String city;
   @JsonKey(name: 'rating')
   final num rating;
-  @JsonKey(name: 'menu')
+  @JsonKey(name: 'menus')
   final Menu? menu;
 
   const Restaurant({

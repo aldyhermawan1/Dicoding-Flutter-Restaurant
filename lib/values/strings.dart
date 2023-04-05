@@ -10,8 +10,10 @@ const labelDrinks = "Drinks";
 const labelDescription = "Descriptions";
 const labelRating = "Rating";
 const labelLocation = "Location";
+const labelTryAgain = "Try Again";
 
 const messageEmptyGeneric = 'There is no data';
+const messageEmptyMenu = 'No menu available';
 const messageEmptySearch = 'There is no matching data';
 const messageErrorGeneric = 'Something wrong';
 const messageErrorNetwork = 'There is a network problem on your device';
