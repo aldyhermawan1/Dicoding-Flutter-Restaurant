@@ -1,9 +1,11 @@
 import 'package:dicoding_restaurant/bloc/restaurant_bloc.dart';
 import 'package:dicoding_restaurant/bloc/state/fetch_restaurant_list_state.dart';
 import 'package:dicoding_restaurant/values/strings.dart';
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/state/search_restaurant_state.dart';
 import 'component/restaurant_item.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,15 +27,27 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: EasySearchBar(
         title: const Text(appTitle),
         leading: const Icon(Icons.restaurant),
+        onSearch: (value) {
+          setState(() {
+            _query = value;
+            if (_query.isNotEmpty) {
+              context.read<RestaurantBloc>().add(SearchRestaurantEvent(_query));
+            } else {
+              context
+                  .read<RestaurantBloc>()
+                  .add(const GetRestaurantListEvent());
+            }
+          });
+        },
       ),
-      body: _build(context),
+      body: (_query.isNotEmpty) ? _buildSearchList() : _buildList(),
     );
   }
 
-  Widget _build(BuildContext context) {
+  Widget _buildList() {
     return BlocBuilder<RestaurantBloc, RestaurantState>(
       builder: (context, state) {
         if (state is FetchRestaurantListLoadingState) {
@@ -43,6 +57,33 @@ class _MainScreenState extends State<MainScreen> {
         } else if (state is FetchRestaurantListErrorState) {
           return Center(child: Text(state.message));
         } else if (state is FetchRestaurantListSuccessState) {
+          return ListView.separated(
+            padding: const EdgeInsets.all(16),
+            itemCount: state.restaurants.length,
+            itemBuilder: (context, index) {
+              return RestaurantItem(restaurant: state.restaurants[index]);
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(height: 8);
+            },
+          );
+        } else {
+          return const Center(child: Text(messageErrorGeneric));
+        }
+      },
+    );
+  }
+
+  Widget _buildSearchList() {
+    return BlocBuilder<RestaurantBloc, RestaurantState>(
+      builder: (context, state) {
+        if (state is SearchRestaurantLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is SearchRestaurantEmptyState) {
+          return const Center(child: Text(messageEmptySearch));
+        } else if (state is SearchRestaurantErrorState) {
+          return Center(child: Text(state.message));
+        } else if (state is SearchRestaurantSuccessState) {
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: state.restaurants.length,
