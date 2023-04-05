@@ -1,4 +1,5 @@
-import 'package:dicoding_restaurant/model/restaurant.dart';
+import 'package:dicoding_restaurant/data/model/restaurant.dart';
+import 'package:dicoding_restaurant/values/strings.dart';
 import 'package:flutter/material.dart';
 
 import '../../../values/routes.dart';
@@ -24,7 +25,7 @@ class RestaurantItem extends StatelessWidget {
                 borderRadius:
                     const BorderRadius.horizontal(left: Radius.circular(10)),
                 child: Image.network(
-                  restaurant.pictureId,
+                  baseUrlImageSmall + restaurant.pictureId,
                   fit: BoxFit.cover,
                   width: 125,
                   height: 100,

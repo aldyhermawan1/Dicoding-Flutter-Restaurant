@@ -2,7 +2,7 @@ import 'package:dicoding_restaurant/presentation/detail/component/menu_list.dart
 import 'package:dicoding_restaurant/values/strings.dart';
 import 'package:flutter/material.dart';
 
-import '../../model/restaurant.dart';
+import '../../data/model/restaurant.dart';
 
 class DetailScreen extends StatelessWidget {
   final Restaurant restaurant;
@@ -27,7 +27,7 @@ class DetailScreen extends StatelessWidget {
             Hero(
               tag: restaurant.id,
               child: Image.network(
-                restaurant.pictureId,
+                baseUrlImageLarge + restaurant.pictureId,
                 width: double.infinity,
                 fit: BoxFit.fitWidth,
               ),
