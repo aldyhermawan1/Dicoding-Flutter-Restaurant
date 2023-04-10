@@ -7,9 +7,9 @@ part of 'menu_name.dart';
 // **************************************************************************
 
 MenuName _$MenuNameFromJson(Map<String, dynamic> json) => MenuName(
-      name: json['id'] as String,
+      name: json['name'] as String,
     );
 
 Map<String, dynamic> _$MenuNameToJson(MenuName instance) => <String, dynamic>{
-      'id': instance.name,
+      'name': instance.name,
     };

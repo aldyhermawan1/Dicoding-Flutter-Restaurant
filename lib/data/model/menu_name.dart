@@ -5,7 +5,7 @@ part 'menu_name.g.dart';
 
 @JsonSerializable()
 class MenuName extends Equatable {
-  @JsonKey(name: 'id')
+  @JsonKey(name: 'name')
   final String name;
 
   const MenuName({required this.name});

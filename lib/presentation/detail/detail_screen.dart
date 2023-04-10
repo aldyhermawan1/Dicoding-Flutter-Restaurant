@@ -1,5 +1,6 @@
 import 'package:dicoding_restaurant/presentation/detail/component/menu_list.dart';
 import 'package:dicoding_restaurant/values/strings.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,6 +58,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   Widget _buildBody(Restaurant restaurant) {
+    FimberLog('restaurant').d(restaurant.toString());
     return Column(
       children: [
         Image.network(
