@@ -79,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
             },
           );
         } else {
-          return const Center(child: Text(messageErrorGeneric));
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );

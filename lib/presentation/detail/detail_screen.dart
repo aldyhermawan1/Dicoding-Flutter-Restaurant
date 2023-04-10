@@ -49,7 +49,7 @@ class _DetailScreenState extends State<DetailScreen> {
           } else if (state is FetchRestaurantDetailSuccessState) {
             return _buildBody(state.restaurant);
           } else {
-            return const Center(child: Text(messageErrorGeneric));
+            return const Center(child: CircularProgressIndicator());
           }
         },
       )),
