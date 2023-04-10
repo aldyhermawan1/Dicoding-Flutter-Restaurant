@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<RestaurantBloc>().add(const GetRestaurantListEvent());
+    getListData();
   }
 
   @override
@@ -47,6 +47,10 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: (_query.isNotEmpty) ? _buildSearchList() : _buildList(),
     );
+  }
+
+  void getListData() {
+    context.read<RestaurantBloc>().add(const GetRestaurantListEvent());
   }
 
   Widget _buildList() {
@@ -114,9 +118,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void detailNavigationAction(Restaurant restaurant) {
-    Navigator.pushNamed(context, routeDetail, arguments: restaurant)
-        .then((_) => setState(() {
-              _query = '';
-            }));
+    Navigator.of(context).pushNamed(routeDetail, arguments: restaurant)
+        .whenComplete(() => getListData());
   }
 }
