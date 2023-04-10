@@ -50,7 +50,11 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void getListData() {
-    context.read<RestaurantBloc>().add(const GetRestaurantListEvent());
+    if (_query.isNotEmpty) {
+      context.read<RestaurantBloc>().add(SearchRestaurantEvent(_query));
+    } else {
+      context.read<RestaurantBloc>().add(const GetRestaurantListEvent());
+    }
   }
 
   Widget _buildList() {
